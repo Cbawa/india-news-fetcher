@@ -6,6 +6,10 @@ A polished single-page app built with **React + Vite** that fetches the **latest
 
 ![Tech](https://img.shields.io/badge/React-18-61dafb) ![Vite](https://img.shields.io/badge/Vite-5-646cff)
 
+## Screenshot
+
+![India News Fetcher — Sports headlines in light mode](docs/screenshot.png)
+
 ## Features
 
 - ⚡️ Latest India headlines (`country=in`, `language=en`) from `GET /news`
