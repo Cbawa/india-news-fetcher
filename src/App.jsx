@@ -44,7 +44,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>\ud83c\uddee\ud83c\uddf3 India News Fetcher</h1>
+        <h1>🇮🇳 India News Fetcher</h1>
         <p>
           Latest headlines powered by{' '}
           <a href="https://newsdata.io" target="_blank" rel="noopener noreferrer">
@@ -64,7 +64,7 @@ export default function App() {
       {error && <div className="banner banner--error">{error}</div>}
 
       {loading ? (
-        <div className="status">Loading headlines\u2026</div>
+        <div className="status">Loading headlines…</div>
       ) : articles.length === 0 && !error ? (
         <div className="status">No articles found. Try a different category or search term.</div>
       ) : (
@@ -81,13 +81,13 @@ export default function App() {
       {!loading && nextPage && (
         <div className="loadmore">
           <button onClick={() => load({ page: nextPage, append: true })} disabled={loadingMore}>
-            {loadingMore ? 'Loading\u2026' : 'Load more'}
+            {loadingMore ? 'Loading…' : 'Load more'}
           </button>
         </div>
       )}
 
       <footer className="footer">
-        <p>Built with React + Vite \u00b7 Data from newsdata.io (free tier)</p>
+        <p>Built with React + Vite · Data from newsdata.io (free tier)</p>
       </footer>
     </div>
   )

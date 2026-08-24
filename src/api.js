@@ -22,7 +22,7 @@ export async function fetchNews({ category = 'top', query = '', page = null } = 
   try {
     res = await fetch(`${BASE}/news?${params.toString()}`)
   } catch (err) {
-    throw new Error('Network error \u2014 check your connection and that the dev server is running.')
+    throw new Error('Network error — check your connection and that the dev server is running.')
   }
 
   let data = null
@@ -41,10 +41,10 @@ export async function fetchNews({ category = 'top', query = '', page = null } = 
       throw new Error('Invalid API key (401). Check NEWSDATA_API_KEY in your .env file.')
     }
     if (code === 429) {
-      throw new Error('Rate limit reached (429). The free plan allows a limited number of requests \u2014 wait a moment and try again.')
+      throw new Error('Rate limit reached (429). The free plan allows a limited number of requests — wait a moment and try again.')
     }
     if (code === 403 || code === 422) {
-      throw new Error('This request needs a paid plan. Falling back to free-tier defaults \u2014 try removing the search term or switching category.')
+      throw new Error('This request needs a paid plan. Falling back to free-tier defaults — try removing the search term or switching category.')
     }
     throw new Error(message || `Request failed (${code}). Please try again.`)
   }

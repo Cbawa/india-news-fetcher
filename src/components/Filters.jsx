@@ -30,7 +30,7 @@ export default function Filters({ category, onCategoryChange, query, onQueryChan
       >
         <input
           type="search"
-          placeholder="Search headlines\u2026"
+          placeholder="Search headlines…"
           value={query}
           aria-label="Search headlines"
           onChange={(e) => onQueryChange(e.target.value)}
