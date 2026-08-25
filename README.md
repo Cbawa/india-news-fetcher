@@ -13,7 +13,7 @@ A polished single-page app built with **React + Vite** that fetches the **latest
 ## Features
 
 - ⚡️ Latest India headlines (`country=in`, `language=en`) from `GET /news`
-- 🗂️ Category filter: **Top**, **Business**, **Sports**
+- 🗂️ Category filter across all 11 free-tier categories: **Top**, **World**, **Business**, **Politics**, **Technology**, **Science**, **Health**, **Environment**, **Sports**, **Entertainment**, **Food**
 - 🔎 Keyword search box (uses the free `q` parameter)
 - 🃏 Responsive headline cards with title, description, **source** and **publish date**
 - ➕ "Load more" pagination using the `nextPage` token
@@ -78,6 +78,22 @@ npm run preview
 
 This project uses only parameters available on the newsdata.io **free plan**: `q`, `country`, `language`, `category`, and `page` (the `nextPage` token) on the `/news` endpoint.
 
+### Categories
+
+All 11 category slugs below are available on the free plan and map one-to-one to the tabs in the UI:
+
+| Slug | Tab | Slug | Tab |
+| --- | --- | --- | --- |
+| `top` | Top | `environment` | Environment |
+| `world` | World | `sports` | Sports |
+| `business` | Business | `entertainment` | Entertainment |
+| `politics` | Politics | `food` | Food |
+| `technology` | Technology | | |
+| `science` | Science | | |
+| `health` | Health | | |
+
+The free plan accepts up to **5 comma-separated categories** per request; this app sends exactly one at a time. Passing a slug the API doesn't recognise returns an `UnsupportedFilter` error rather than an empty result set.
+
 The following are **paid-only** and are intentionally **not used**:
 
 - Sentiment analysis (`sentiment`)
@@ -98,10 +114,12 @@ If newsdata.io returns a `403`/`422` "upgrade your plan" response, the app shows
     ├── main.jsx
     ├── App.jsx             # state, fetching, layout
     ├── api.js              # fetch wrapper + error handling
-    ├── index.css
+    ├── index.css           # base (dark) palette + layout
+    ├── theme.css           # light-mode overrides
     └── components
         ├── Filters.jsx     # category tabs + search
-        └── NewsCard.jsx    # headline card
+        ├── NewsCard.jsx    # headline card
+        └── ThemeToggle.jsx # dark/light switch (persisted)
 ```
 
 ## License

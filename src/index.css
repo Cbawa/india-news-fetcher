@@ -2,7 +2,7 @@
   --bg: #0f1117;
   --surface: #1a1d27;
   --surface-2: #232735;
-  --text: #e8eaف0;
+  --text: #e8eaf0;
   --muted: #9aa0b0;
   --accent: #5b8cff;
   --border: #2c3142;
@@ -81,6 +81,24 @@ a:hover {
   border-color: var(--accent);
   color: #fff;
   font-weight: 600;
+}
+
+/* With 11 categories the pills wrap to two rows on desktop, which is fine, but
+   on a phone they would stack into a wall. Turn them into one swipeable strip. */
+@media (max-width: 640px) {
+  .filters__tabs {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filters__tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .tab {
+    flex: 0 0 auto;
+  }
 }
 
 .filters__search {

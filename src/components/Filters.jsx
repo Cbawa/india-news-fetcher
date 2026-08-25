@@ -1,7 +1,18 @@
+// Every category slug the newsdata.io free tier accepts on /news, ordered
+// hard-news first. Verified against the live endpoint — an unknown slug comes
+// back as an `UnsupportedFilter` error rather than an empty result set.
 const CATEGORIES = [
   { id: 'top', label: 'Top' },
+  { id: 'world', label: 'World' },
   { id: 'business', label: 'Business' },
+  { id: 'politics', label: 'Politics' },
+  { id: 'technology', label: 'Technology' },
+  { id: 'science', label: 'Science' },
+  { id: 'health', label: 'Health' },
+  { id: 'environment', label: 'Environment' },
   { id: 'sports', label: 'Sports' },
+  { id: 'entertainment', label: 'Entertainment' },
+  { id: 'food', label: 'Food' },
 ]
 
 export default function Filters({ category, onCategoryChange, query, onQueryChange, onSearch }) {
