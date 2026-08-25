@@ -29,7 +29,7 @@ A polished single-page app built with **React + Vite** that fetches the **latest
 1. **Clone & install**
 
    ```bash
-   git clone https://github.com/your-username/india-news-fetcher.git
+   git clone https://github.com/cbawa/india-news-fetcher.git
    cd india-news-fetcher
    npm install
    ```
