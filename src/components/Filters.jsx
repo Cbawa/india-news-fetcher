@@ -1,4 +1,4 @@
-// Every category slug the newsdata.io free tier accepts on /news, ordered
+// Every category slug the newsdata.io free tier accepts on /latest, ordered
 // hard-news first. Verified against the live endpoint — an unknown slug comes
 // back as an `UnsupportedFilter` error rather than an empty result set.
 const CATEGORIES = [

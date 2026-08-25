@@ -1,4 +1,4 @@
-// Thin wrapper around the newsdata.io /news endpoint.
+// Thin wrapper around the newsdata.io /latest endpoint.
 // Requests go to the local `/api` path; the Vite dev proxy forwards them to
 // https://newsdata.io/api/1 and injects the apikey (see vite.config.js).
 
@@ -20,7 +20,7 @@ export async function fetchNews({ category = 'top', query = '', page = null } = 
 
   let res
   try {
-    res = await fetch(`${BASE}/news?${params.toString()}`)
+    res = await fetch(`${BASE}/latest?${params.toString()}`)
   } catch (err) {
     throw new Error('Network error — check your connection and that the dev server is running.')
   }

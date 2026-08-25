@@ -17,7 +17,7 @@ A **React news app** built with **React 18 + Vite**, fetching live India headlin
 
 ## Features
 
-- ⚡️ **Live India headlines** (`country=in`, `language=en`) from the `GET /news` endpoint
+- ⚡️ **Live India headlines** (`country=in`, `language=en`) from the `GET /latest` endpoint
 - 🗂️ **11 category filters** — Top, World, Business, Politics, Technology, Science, Health, Environment, Sports, Entertainment, Food
 - 🔎 **Keyword search** using the free `q` parameter
 - 🃏 **Responsive news cards** with image, title, description, **source** and **publish date**
@@ -67,10 +67,10 @@ Open the printed URL (usually http://localhost:5173).
 
 ## How it works
 
-The browser calls a local path like `/api/news?country=in&category=top`. Vite's dev proxy (see `vite.config.js`) forwards that to `https://newsdata.io/api/1/news`, transparently appending `apikey=$NEWSDATA_API_KEY`. Your key never reaches the client-side JavaScript.
+The browser calls a local path like `/api/latest?country=in&category=top`. Vite's dev proxy (see `vite.config.js`) forwards that to `https://newsdata.io/api/1/latest`, transparently appending `apikey=$NEWSDATA_API_KEY`. Your key never reaches the client-side JavaScript.
 
 ```
-browser ──> /api/news ──> [Vite proxy adds apikey] ──> https://newsdata.io/api/1/news
+browser ──> /api/latest ──> [Vite proxy adds apikey] ──> https://newsdata.io/api/1/latest
 ```
 
 ## Categories
@@ -100,7 +100,7 @@ npm run preview
 
 ## Free-tier notes
 
-This project uses only parameters available on the newsdata.io **free plan**: `q`, `country`, `language`, `category`, and `page` (the `nextPage` token) on the `/news` endpoint.
+This project uses only parameters available on the newsdata.io **free plan**: `q`, `country`, `language`, `category`, and `page` (the `nextPage` token) on the `/latest` endpoint.
 
 The following are **paid-only** and are intentionally **not used**:
 
