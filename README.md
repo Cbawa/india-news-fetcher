@@ -1,85 +1,81 @@
-# 🇮🇳 India News Fetcher
+# React News App — Live India Headlines from the newsdata.io News API
 
-A polished single-page app built with **React + Vite** that fetches the **latest India news** from the [newsdata.io](https://newsdata.io) REST API. Headlines are shown as cards with their source and publish date. You can filter by category (Top / Business / Sports) and search headlines with a keyword.
+A **React news app** built with **React 18 + Vite**, fetching live India headlines from the [newsdata.io](https://newsdata.io) REST news API. Headlines render as cards with source and publish date, filterable across **11 categories**, with keyword search, "load more" pagination, and a dark/light theme.
 
-> Built entirely against the **newsdata.io FREE tier** — no paid features required.
-<img width="1830" height="961" alt="Screenshot from 2026-08-25 10-59-47" src="https://github.com/user-attachments/assets/ad6dde1d-9d8d-4223-a4ba-0bf48ef1e6e7" />
+**Built entirely on the newsdata.io free tier — no paid plan, no credit card, no paid-only parameters.**
 
+[![React](https://img.shields.io/badge/React-18-61dafb?logo=react&logoColor=white)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-5-646cff?logo=vite&logoColor=white)](https://vitejs.dev)
+[![News API](https://img.shields.io/badge/API-newsdata.io-1f6feb)](https://newsdata.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## Screenshot
+<img width="1830" height="961" alt="React news app showing India headlines fetched from the newsdata.io API, with category filter tabs and search" src="https://github.com/user-attachments/assets/ad6dde1d-9d8d-4223-a4ba-0bf48ef1e6e7" />
 
+> **Live demo:** _not deployed yet_ — see [Building for production](#building-for-production).
+
+---
 
 ## Features
 
-- ⚡️ Latest India headlines (`country=in`, `language=en`) from `GET /news`
-- 🗂️ Category filter across all 11 free-tier categories: **Top**, **World**, **Business**, **Politics**, **Technology**, **Science**, **Health**, **Environment**, **Sports**, **Entertainment**, **Food**
-- 🔎 Keyword search box (uses the free `q` parameter)
-- 🃏 Responsive headline cards with title, description, **source** and **publish date**
-- ➕ "Load more" pagination using the `nextPage` token
-- 🛡️ Graceful error handling for invalid keys (401), rate limits (429), empty results, and paid-only requests (403/422)
-- 🔐 Your API key stays **server-side** in development (injected by the Vite dev proxy), so it never ships in the browser bundle
+- ⚡️ **Live India headlines** (`country=in`, `language=en`) from the `GET /news` endpoint
+- 🗂️ **11 category filters** — Top, World, Business, Politics, Technology, Science, Health, Environment, Sports, Entertainment, Food
+- 🔎 **Keyword search** using the free `q` parameter
+- 🃏 **Responsive news cards** with image, title, description, **source** and **publish date**
+- ➕ **"Load more" pagination** via the `nextPage` token
+- 🌗 **Dark / light theme** toggle, persisted across reloads
+- 🛡️ **Real error handling** for invalid keys (401), rate limits (429), empty results, and paid-only requests (403/422)
+- 🔐 **API key stays server-side** in development — injected by the Vite dev proxy, never shipped in the browser bundle
 
-## Prerequisites
+## Tech stack
 
-- [Node.js](https://nodejs.org/) 18+ and npm
-- A free newsdata.io API key — [register here](https://newsdata.io/register)
+| Layer | Choice |
+| --- | --- |
+| UI | React 18 (hooks — `useState`, `useEffect`, `useCallback`) |
+| Build | Vite 5 |
+| Data | [newsdata.io](https://newsdata.io) REST news API (free tier) |
+| Styling | Plain CSS with custom properties (no UI framework) |
+| Key handling | Vite dev-server proxy |
 
-## Setup
+No Redux, no component library, no CSS framework — small enough to read end to end in a few minutes.
 
-1. **Clone & install**
+## Quick start
 
-   ```bash
-   git clone https://github.com/cbawa/india-news-fetcher.git
-   cd india-news-fetcher
-   npm install
-   ```
+**Prerequisites:** [Node.js](https://nodejs.org/) 18+ and npm, plus a free newsdata.io API key ([register here](https://newsdata.io/register)).
 
-2. **Add your API key.** Copy the example env file and paste your key:
+```bash
+# 1. Clone & install
+git clone https://github.com/cbawa/india-news-fetcher.git
+cd india-news-fetcher
+npm install
 
-   ```bash
-   cp .env.example .env
-   ```
+# 2. Add your API key
+cp .env.example .env
+```
 
-   Then edit `.env`:
+Edit `.env` and paste your key:
 
-   ```bash
-   NEWSDATA_API_KEY=your_api_key_here
-   ```
+```bash
+NEWSDATA_API_KEY=your_api_key_here
+```
 
-   The app reads the key from the **`NEWSDATA_API_KEY`** environment variable. The Vite dev server appends it as the `apikey` query parameter to every request, so the key is never exposed to the browser.
+```bash
+# 3. Run it
+npm run dev
+```
 
-3. **Run the dev server**
-
-   ```bash
-   npm run dev
-   ```
-
-   Open the printed URL (usually http://localhost:5173).
+Open the printed URL (usually http://localhost:5173).
 
 ## How it works
 
-The browser calls a local path like `/api/news?country=in&category=top`. Vite's dev proxy (see `vite.config.js`) forwards that to `https://newsdata.io/api/1/news`, transparently adding `apikey=$NEWSDATA_API_KEY`. This keeps your key out of the client-side JavaScript.
+The browser calls a local path like `/api/news?country=in&category=top`. Vite's dev proxy (see `vite.config.js`) forwards that to `https://newsdata.io/api/1/news`, transparently appending `apikey=$NEWSDATA_API_KEY`. Your key never reaches the client-side JavaScript.
 
 ```
 browser ──> /api/news ──> [Vite proxy adds apikey] ──> https://newsdata.io/api/1/news
 ```
 
-## Building for production
+## Categories
 
-```bash
-npm run build
-npm run preview
-```
-
-> ⚠️ **Important:** The dev-server proxy that hides your API key only runs during `npm run dev`. A static production build cannot keep a secret key hidden — anything in the browser bundle is public. For a real deployment, put a small backend/serverless function in front of newsdata.io that injects the key, and point the app's `/api` calls at it. **Never commit your real key or ship it in client code.**
-
-## Free-tier notes
-
-This project uses only parameters available on the newsdata.io **free plan**: `q`, `country`, `language`, `category`, and `page` (the `nextPage` token) on the `/news` endpoint.
-
-### Categories
-
-All 11 category slugs below are available on the free plan and map one-to-one to the tabs in the UI:
+All 11 slugs below work on the **free plan** and map one-to-one to the tabs in the UI:
 
 | Slug | Tab | Slug | Tab |
 | --- | --- | --- | --- |
@@ -91,7 +87,20 @@ All 11 category slugs below are available on the free plan and map one-to-one to
 | `science` | Science | | |
 | `health` | Health | | |
 
-The free plan accepts up to **5 comma-separated categories** per request; this app sends exactly one at a time. Passing a slug the API doesn't recognise returns an `UnsupportedFilter` error rather than an empty result set.
+The free plan accepts up to **5 comma-separated categories** per request; this app sends exactly one at a time. An unrecognised slug returns an `UnsupportedFilter` error rather than an empty result set.
+
+## Building for production
+
+```bash
+npm run build
+npm run preview
+```
+
+> ⚠️ **Read this before deploying.** The dev-server proxy that hides your API key only runs during `npm run dev`. A static production build **cannot** keep a secret key hidden — anything in the browser bundle is public. For a real deployment, put a small backend or serverless function in front of newsdata.io that injects the key, and point the app's `/api` calls at it. **Never commit your real key or ship it in client code.**
+
+## Free-tier notes
+
+This project uses only parameters available on the newsdata.io **free plan**: `q`, `country`, `language`, `category`, and `page` (the `nextPage` token) on the `/news` endpoint.
 
 The following are **paid-only** and are intentionally **not used**:
 
@@ -100,7 +109,24 @@ The following are **paid-only** and are intentionally **not used**:
 - The historical `/archive` endpoint and long date ranges
 - Advanced full-text query operators
 
-If newsdata.io returns a `403`/`422` "upgrade your plan" response, the app shows a friendly message and keeps working with the free-tier defaults.
+If newsdata.io returns a `403`/`422` "upgrade your plan" response, the app shows a friendly message and keeps working with free-tier defaults.
+
+## FAQ
+
+**Is there a free news API I can use with React?**
+Yes — newsdata.io has a free tier, and this repo is a complete working example against it. No paid parameters are used anywhere.
+
+**How do I hide an API key in a React app?**
+You can't, in a purely static build — anything in the bundle is readable by any visitor. This project demonstrates the correct pattern: a proxy layer holds the key and the browser only ever calls your own endpoint. See [How it works](#how-it-works).
+
+**Can I fetch news for a country other than India?**
+Yes. `country` and `language` are set in [`src/api.js`](src/api.js) — change `'in'` to another supported country code and the rest of the app works unchanged.
+
+**Can I search headlines by keyword?**
+Yes, via the free `q` parameter — that's what the search box sends.
+
+**Why are some categories empty for my query?**
+Combining a narrow `q` with a specific category can legitimately return zero results. Clear the search box or switch category.
 
 ## Project structure
 
@@ -122,6 +148,10 @@ If newsdata.io returns a `403`/`422` "upgrade your plan" response, the app shows
         └── ThemeToggle.jsx # dark/light switch (persisted)
 ```
 
+## Contributing
+
+Issues and pull requests are welcome — bug fixes, new filters, deployment recipes, or a UI pass. Fork the repo, branch off `main`, and open a PR.
+
 ## License
 
 Released under the [MIT License](LICENSE) — free to use, learn from, and build on.
@@ -130,4 +160,6 @@ Copyright (c) 2026 NewsData.io.
 
 ---
 
-Data provided by [newsdata.io](https://newsdata.io).
+**Keywords:** react news app · react news application · news app using react · newsdata.io api example · free news api · india news api · react rest api example · vite spa · javascript news aggregator
+
+Data provided by [newsdata.io](https://newsdata.io) — a REST news API with global coverage and a free tier.
