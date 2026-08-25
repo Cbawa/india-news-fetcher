@@ -3,12 +3,11 @@
 A polished single-page app built with **React + Vite** that fetches the **latest India news** from the [newsdata.io](https://newsdata.io) REST API. Headlines are shown as cards with their source and publish date. You can filter by category (Top / Business / Sports) and search headlines with a keyword.
 
 > Built entirely against the **newsdata.io FREE tier** — no paid features required.
+<img width="1830" height="961" alt="Screenshot from 2026-08-25 10-59-47" src="https://github.com/user-attachments/assets/ad6dde1d-9d8d-4223-a4ba-0bf48ef1e6e7" />
 
-![Tech](https://img.shields.io/badge/React-18-61dafb) ![Vite](https://img.shields.io/badge/Vite-5-646cff)
 
 ## Screenshot
 
-![India News Fetcher — Sports headlines in light mode](docs/screenshot.png)
 
 ## Features
 
