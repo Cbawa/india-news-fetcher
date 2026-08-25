@@ -109,6 +109,7 @@ If newsdata.io returns a `403`/`422` "upgrade your plan" response, the app shows
 ├── vite.config.js          # dev proxy that injects the API key
 ├── package.json
 ├── .env.example
+├── LICENSE                 # MIT
 └── src
     ├── main.jsx
     ├── App.jsx             # state, fetching, layout
@@ -123,7 +124,9 @@ If newsdata.io returns a `403`/`422` "upgrade your plan" response, the app shows
 
 ## License
 
-MIT — free to use, learn from, and build on.
+Released under the [MIT License](LICENSE) — free to use, learn from, and build on.
+
+Copyright (c) 2026 NewsData.io.
 
 ---
 

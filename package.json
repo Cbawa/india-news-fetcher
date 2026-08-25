@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "React + Vite SPA for the latest India news from newsdata.io (free tier)",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
